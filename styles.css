@@ -1,0 +1,278 @@
+/* refined-styles.css */
+:root {
+    --font-main: 'Inter', sans-serif;
+    --color-white: #fcfdfd;
+    --color-gray-100: #f3f4f6;
+    --color-gray-400: #9ca3af;
+    --color-black-overlay: rgba(0, 0, 0, 0.65);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --card-radius: 24px;
+    --btn-radius: 100px;
+    --transition-fast: 0.2s ease;
+    --transition-bounce: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--color-white);
+    background-color: #000;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Center content vertically */
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background Handling */
+.bg-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('assets/bg-card.png');
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+}
+
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0.6) 40%,
+            rgba(0, 0, 0, 0.9) 100%);
+    z-index: -1;
+    backdrop-filter: blur(4px);
+}
+
+.container {
+    width: 100%;
+    max-width: 480px;
+    padding: 2rem 1.5rem;
+    /* Removed extra bottom padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Header */
+.profile-header {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-pic-container {
+    width: 100px;
+    /* Hidden in reference mainly, but good structure if needed. Or invisible */
+    height: 100px;
+    /* Making it 0 for now as per reference which is text heavy top */
+    display: none;
+    /* Hiding based on "Chloe" reference which is just text overlay */
+}
+
+/* In the reference, the "Chloe Mia Brown" is big text. The background IS the girl. */
+/* So we need to ensure the text pops from the background */
+
+.username {
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    line-height: 1.1;
+}
+
+.handle {
+    font-size: 1rem;
+    color: rgba(252, 253, 253, 0.5);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+@keyframes pulse-soft {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.social-link {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    /* Insta Gradient */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.8rem;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform var(--transition-bounce);
+    animation: pulse-soft 1.5s infinite ease-in-out;
+}
+
+.social-link.logo-custom {
+    background: white;
+    /* Or custom color */
+    overflow: hidden;
+    padding: 2px;
+}
+
+.social-link.logo-custom img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.social-link:hover {
+    animation: none;
+    transform: scale(1.15) translateY(-2px);
+}
+
+/* Main Content */
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+    font-weight: 200;
+}
+
+/* Action Card */
+.action-card {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.action-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.card-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.card-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.action-card:hover .card-bg img {
+    transform: scale(1.05);
+    /* Subtle zoom on hover */
+}
+
+.card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 60%);
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.card-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-45deg);
+    /* Link icon styling */
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    padding: 4px;
+    backdrop-filter: blur(4px);
+}
+
+.card-icon i {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+
+
+@media (max-width: 360px) {
+    .username {
+        font-size: 1.8rem;
+    }
+
+    .subscribe-btn {
+        padding: 0.6rem 1rem;
+    }
+}
